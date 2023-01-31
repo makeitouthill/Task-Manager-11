@@ -5,7 +5,7 @@
         
 A note taker that users can input a note title, and note content then being able to save the note to the page
 
-![Gif of Functionality](./public/assets/images/NoteTaker.gif.gif) 
+![Gif of Functionality](./images/NoteTaker.gif.gif) 
 
 ## Table of Contents
 - [Installation](#installation-installation)
