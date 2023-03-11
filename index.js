@@ -1,57 +1,16 @@
-const express = require('express');
-const fs = require('fs');
-
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-const app = express();
-const PORT = 5500;
-const path = require('path');
-
-app.use(express.json());
-app.use(express.static('public'));
-
-app.get("/notes", (req, res) => {
-  res.sendFile(path.join(__dirname, "notes.html"));
-});
-
-app.get('*', (req, res) =>{
-  res.sendFile(__dirname + '/public/index.html');
-});
-
-const saveButton = document.getElementById("save-button");
-saveButton.addEventListener("click", function() {
-  app.post('/api/notes', (req, res) => {
-    fs.readFile('./db.json', 'utf-8', (err, data) => {
-      if (err) throw err;
-      let notes = JSON.parse(data);
-      let newNote = req.body;
-      notes.push(newNote);
-      fs.writeFile('./db.json', JSON.stringify(notes), 'utf-8', (err) => {
-        if (err) throw err;
-        res.json(newNote);
-      });
-    });
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:5500`);
-});
-
-if(typeof window !== 'undefined'){
-  if (window.location.pathname === '/notes') {
-    noteTitle = document.querySelector('.note-title');
-    noteText = document.querySelector('.note-textarea');
-    saveNoteBtn = document.querySelector('.save-note');
-    newNoteBtn = document.querySelector('.new-note');
-    noteList = document.querySelectorAll('.list-container .list-group');
-  };
-};
+if (window.location.pathname === '/notes') {
+  noteTitle = document.querySelector('.note-title');
+  noteText = document.querySelector('.note-textarea');
+  saveNoteBtn = document.querySelector('.save-note');
+  newNoteBtn = document.querySelector('.new-note');
+  noteList = document.querySelectorAll('.list-container .list-group');
+}
 
 // Show an element
 const show = (elem) => {
